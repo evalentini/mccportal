@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mccportal</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	
+	<div class="container-fluid">
+		
+		<div class="row-fluid" style="margin-top: 20px;">
+			<div class="col-xs-12" style="text-align:center;">
+				<%= image_tag "newmcclogo.jpg", alt: "Management Consulting Club" %>
+			</div>
+		</div>
+		
+		<div class="row-fluid">
+			<div class="col-xs-12" style="text-align: center;">
+			    <div class="btn-group">
+					<a href="#" class="btn btn-default">Home</a>
+					<a href="#" class="btn btn-default">About</a>
+					<a href="#" class="btn btn-default">Calendar</a>
+					<a href="#" class="btn btn-default">Recruiters</a>
+					<% if session[:user_id] %>
+  				      <button 
+					  	type="button" 
+						class="btn btn-danger dropdown-toggle" 
+						data-toggle="dropdown"
+						>
+						<ul class="dropdown-menu">
+							<li><a href="#" class="btn btn-default">Schedule Interview</a></li>
+							<li><a href="<%= url_for :controller=>'users', :action=>'profile'%>" 
+							class="btn btn-default">My Profile</a></li>
+						</ul>
+					Prep Portal</button>
+					<a href="/sessions/destroy" class="btn btn-default">Log Out: <%= @user_email %></a> 
+					<% else %>
+						<a href="/sessions/new" class="btn btn-default">Login</a> 
+					<% end %>
+			    </div>
+			</div>		
+		</div>
+		
+		<div class="row-fluid">
+			<%= yield %>
+		</div>
+	</div>
+
+
+</body>
+</html>
